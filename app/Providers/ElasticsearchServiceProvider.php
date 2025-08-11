@@ -12,9 +12,22 @@ class ElasticsearchServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Client::class, function ($app) {
-            return \Elastic\Elasticsearch\ClientBuilder::create()
-                ->setHosts([env('ELASTICSEARCH_HOST', 'localhost:9200')])
-                ->build();
+            $config = config('services.elasticsearch');
+            
+            $builder = \Elastic\Elasticsearch\ClientBuilder::create()
+                ->setHosts($config['hosts']);
+            
+            // Add authentication if credentials are provided
+            if (!empty($config['username']) && !empty($config['password'])) {
+                $builder->setBasicAuthentication($config['username'], $config['password']);
+            }
+            
+            // Handle SSL verification
+            if (isset($config['ssl_verification']) && !$config['ssl_verification']) {
+                $builder->setSSLVerification(false);
+            }
+            
+            return $builder->build();
         });
     }
 

@@ -219,7 +219,7 @@ return [
 
     'elasticsearch' => [
         'hosts' => [
-            env('ELASTICSEARCH_HOST', '80.225.213.222:9200'),
+            env('ELASTICSEARCH_HOST', '192.168.0.224:9200'),
         ],
         'index_prefix' => env('ELASTICSEARCH_INDEX_PREFIX', 'laravel_scout'),
         'number_of_shards' => env('ELASTICSEARCH_NUMBER_OF_SHARDS', 1),
