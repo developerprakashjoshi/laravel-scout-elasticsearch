@@ -59,6 +59,8 @@ class Post extends Model
     public function searchableAs()
     {
         return 'posts';
+        
+
     }
 
     /**
@@ -69,6 +71,8 @@ class Post extends Model
     public function shouldBeSearchable()
     {
         return true; // Always searchable
+        // return $this->status === 'published'; // Only index published posts
+        // return !$this->isDeleted() && $this->isApproved();
     }
 
     /**
@@ -79,6 +83,7 @@ class Post extends Model
     public function getScoutKey()
     {
         return $this->id;
+        // return $this->slug; // Use slug instead of ID
     }
 
     /**
@@ -89,6 +94,7 @@ class Post extends Model
     public function getScoutKeyName()
     {
         return 'id';
+        // return 'slug'; // Use slug instead of ID
     }
 
     /**

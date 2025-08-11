@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Elastic\Elasticsearch\Client;
 
-class TestElasticsearchConnection extends Command
+class ScoutTestElasticsearch extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'elasticsearch:test-connection';
+    protected $signature = 'scout:test-elasticsearch';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Test the connection to Elasticsearch';
+    protected $description = 'Test the Elasticsearch connection for Laravel Scout';
 
     /**
      * Execute the console command.
