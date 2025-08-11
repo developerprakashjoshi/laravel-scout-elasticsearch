@@ -12,7 +12,7 @@ class ElasticsearchServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Client::class, function ($app) {
-            $config = config('services.elasticsearch');
+            $config = config('scout.elasticsearch');
             
             $builder = \Elastic\Elasticsearch\ClientBuilder::create()
                 ->setHosts($config['hosts']);
