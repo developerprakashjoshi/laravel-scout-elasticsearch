@@ -4,7 +4,7 @@ namespace LaravelScout\Elasticsearch\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Scout\EngineManager;
-use App\Services\ElasticsearchEngine;
+use LaravelScout\Elasticsearch\Services\ElasticsearchEngine;
 use Elastic\Elasticsearch\Client;
 
 class ElasticsearchServiceProvider extends ServiceProvider
@@ -33,6 +33,11 @@ class ElasticsearchServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        // Publish configuration file
+        $this->publishes([
+            __DIR__ . '/../../config/scout.php' => config_path('scout.php'),
+        ], 'laravel-scout-elasticsearch-config');
+
         resolve(EngineManager::class)->extend('elasticsearch', function () {
             return new ElasticsearchEngine(
                 app(Client::class)
