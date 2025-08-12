@@ -33,7 +33,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelScout\\Elasticsearch\\ElasticsearchServiceProvider"
+                "LaravelScout\\Elasticsearch\\Providers\\ElasticsearchServiceProvider"
             ],
             "config": [
                 "config/scout.php"
