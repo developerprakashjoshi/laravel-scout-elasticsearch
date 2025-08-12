@@ -19,6 +19,8 @@ class Post extends Model
         'sub_category',  // New field
         'tags',          // New field
         'status',        // New field
+        'misc',
+        'is_draft',
     ];
 
     protected $casts = [
@@ -40,10 +42,12 @@ class Post extends Model
             'published_at' => $this->published_at?->toISOString(),
             'created_at' => $this->created_at->toISOString(),
             'updated_at' => $this->updated_at->toISOString(),
-            'category' => $this->category ?? null,
-            'sub_category' => $this->sub_category ?? 'dms',
-            'tags' => $this->tags ?? null,
-            'status' => $this->status ?? null,
+                            'category' => $this->category ?? null,
+        'misc' => $this->misc ?? 'others',
+        'sub_category' => $this->sub_category ?? 'dms',
+        'tags' => $this->tags ?? null,
+        'status' => $this->status ?? null,
+        'is_draft' => $this->is_draft ?? false,
             'title_suggest' => [
                 'input' => [$this->title],
                 'weight' => 1
@@ -143,6 +147,15 @@ class Post extends Model
                         ]
                     ]
                 ],
+                'misc' => [
+                    'type' => 'text',
+                    'analyzer' => 'standard',
+                    'fields' => [
+                        'keyword' => [
+                            'type' => 'keyword'
+                        ]
+                    ]
+                ],
                 'published_at' => [
                     'type' => 'date',
                     'format' => 'strict_date_optional_time||epoch_millis'
@@ -154,6 +167,18 @@ class Post extends Model
                 'updated_at' => [
                     'type' => 'date',
                     'format' => 'strict_date_optional_time||epoch_millis'
+                ],
+                'misc' => [
+                    'type' => 'text',
+                    'analyzer' => 'standard',
+                    'fields' => [
+                        'keyword' => [
+                            'type' => 'keyword'
+                        ]
+                    ]
+                ],
+                'is_draft' => [
+                    'type' => 'boolean'
                 ],
             ]
         ];
