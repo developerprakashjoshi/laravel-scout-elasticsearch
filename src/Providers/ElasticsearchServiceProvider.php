@@ -38,6 +38,18 @@ class ElasticsearchServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/scout.php' => config_path('scout.php'),
         ], 'laravel-scout-elasticsearch-config');
 
+        // Register commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \LaravelScout\Elasticsearch\Console\Commands\ScoutTestElasticsearch::class,
+                \LaravelScout\Elasticsearch\Console\Commands\ZeroDowntimeReindex::class,
+                \LaravelScout\Elasticsearch\Console\Commands\ScoutLazyBackfill::class,
+                \LaravelScout\Elasticsearch\Console\Commands\AddNewFieldsReindex::class,
+                \LaravelScout\Elasticsearch\Console\Commands\ReindexLargeDataset::class,
+                \LaravelScout\Elasticsearch\Console\Commands\SeedLargeDataset::class,
+            ]);
+        }
+
         resolve(EngineManager::class)->extend('elasticsearch', function () {
             return new ElasticsearchEngine(
                 app(Client::class)
