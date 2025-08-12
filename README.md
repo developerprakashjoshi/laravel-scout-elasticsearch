@@ -129,6 +129,24 @@ php artisan scout:lazy-backfill priority --type=keyword
 php artisan scout:lazy-backfill status --type=keyword --force
 ```
 
+#### Add New Fields and Reindex
+```bash
+# Add new fields and reindex the model
+php artisan scout:add-fields-reindex "App\Models\Post"
+```
+
+#### Large Dataset Reindexing
+```bash
+# Reindex large datasets with batch processing
+php artisan scout:reindex-large-dataset "App\Models\Post" --batch-size=1000
+```
+
+#### Seed Large Dataset
+```bash
+# Seed large datasets for testing
+php artisan scout:seed-large-dataset "App\Models\Post" --count=10000
+```
+
 ## Advanced Features
 
 ### Zero-Downtime Reindexing
